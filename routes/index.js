@@ -3,10 +3,13 @@ var router = express();
 const UserModel = require("./users");
 const postModel = require("./posts");
 const mongoose = require("mongoose");
-const passport = require("passport")
+const passport = require("passport");
+require('dotenv').config();
+const url = process.env.Mongo_URL;
 const localStrategy = require("passport-local");
 passport.use(new localStrategy(UserModel.authenticate()));
-mongoose.connect("mongodb+srv://miraamir189:hfLr1ShMOO4vCPDx@cluster0.jsshzzi.mongodb.net/pinterest");
+// mongoose.connect(process.env.Mongo_URL);
+mongoose.connect(url);
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
