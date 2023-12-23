@@ -14,7 +14,9 @@ mongoose.connect(url);
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'Express' });
+});
 router.post("/register",isAlreadyRegistered,function(req,res){
   const {username,email,fullname}= req.body;
   const userData = new UserModel({username,email,fullname});
@@ -30,7 +32,7 @@ router.post("/login",passport.authenticate("local",{
 }),function(req,res){
 });
 router.get('/profile',isLoggedIn, function(req, res, next){
- res.send("profile");
+  res.render('feed', { title: 'Express' });
 });
 router.get('/logout', function(req, res, next){
   req.logout(function(err) {
